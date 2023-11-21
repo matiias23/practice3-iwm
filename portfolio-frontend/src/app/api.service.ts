@@ -11,7 +11,7 @@ export class ApiService {
   constructor(private http:HttpClient) { }
 
   getProfileData(): Observable<any> {
-    const url = `${this.apiUrl}/obtener-datos`;
+    const url = `${this.apiUrl}/profile`;
     return this.http.get<any>(url);
   }
 }
