@@ -1,0 +1,37 @@
+{
+	"info": {
+		"_postman_id": "d5dd0e73-8797-4894-81d0-f4282ee03872",
+		"name": "Practice3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27777484"
+	},
+	"item": [
+		{
+			"name": "Get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:8000/api/profile"
+			},
+			"response": []
+		},
+		{
+			"name": "Put",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Matiass Ignacio Nuñez Salomon\",\r\n    \"rut\": \"199518356\",\r\n    \"carrera\": \"Estudiante de Ingenieria Civil Computación e Informática\",\r\n    \"universidad\": \"Universidad Catolika del Norte\",\r\n    \"edad\": 99,\r\n    \"ciudadOrigen\": \"Antofagasta, Chile\",\r\n    \"email\": \"matias.nunez01@alumnos.ucn.cl\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/editar-perfil/199518356"
+			},
+			"response": []
+		}
+	]
+}

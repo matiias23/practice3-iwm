@@ -1,20 +1,101 @@
-<ion-header [translucent]="true">
+
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleEditMode()">
+        {{ editMode ? 'Guardar' : 'Editar' }}
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Mi Página</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content *ngIf="profileData" class="ion-padding">
+  <h1 class="ion-text-center">Mi Nombre es {{ profileData.nombre }}</h1>
+  <p class="ion-text-justify">Soy estudiante de {{ profileData.carrera }} de la <a href="https://www.ucn.cl">{{ profileData.universidad }}</a>.</p>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-list *ngIf="editMode">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="profileData.nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Carrera</ion-label>
+      <ion-input [(ngModel)]="profileData.carrera"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Universidad</ion-label>
+      <ion-input [(ngModel)]="profileData.universidad"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Edad</ion-label>
+      <ion-input [(ngModel)]="profileData.edad"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">ciudad</ion-label>
+      <ion-input [(ngModel)]="profileData.ciudadOrigen"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">email</ion-label>
+      <ion-input [(ngModel)]="profileData.email"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <h2>Datos Personales</h2>
+  <ion-list>
+    <ion-item>
+      <ion-label>Edad:</ion-label>
+      <ion-note slot="end">{{ profileData.edad }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Ciudad de origen:</ion-label>
+      <ion-note slot="end">{{ profileData.ciudadOrigen }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email:</ion-label>
+      <ion-note slot="end">{{ profileData.email }}</ion-note>
+    </ion-item>
+  </ion-list>
+
+  <h2>Intereses y/o Pasatiempos</h2>
+<ion-list>
+  <ion-item *ngFor="let hobby of profileData?.hobbys">
+    <!-- Mostrar el pasatiempo como texto cuando no estás en modo de edición -->
+    <ng-container *ngIf="!editMode">
+      {{ hobby.pasatiempo }}
+    </ng-container>
+  
+    <!-- Mostrar el pasatiempo como campo de entrada cuando estás en modo de edición -->
+    <ng-container *ngIf="editMode">
+      <ion-label position="stacked">Pasatiempo</ion-label>
+      <ion-input [(ngModel)]="hobby.pasatiempo"></ion-input>
+    </ng-container>
+  </ion-item>
+</ion-list>
+
+<h2>Herramientas Tecnológicas</h2>
+<ion-list>
+  <ion-item-group *ngFor="let tipo of ['lenguaje', 'framework', 'tecnologia']">
+    <ion-list-header>{{ tipo | titlecase }}s Utilizados</ion-list-header>
+    
+    <ion-item *ngFor="let framework of profileData?.frameworks">
+      <!-- Mostrar la herramienta como texto cuando no estás en modo de edición -->
+      <ng-container *ngIf="!editMode && framework.tipo === tipo">
+        <ion-label>{{ framework.herramienta }}</ion-label>
+      </ng-container>
+  
+      <!-- Mostrar la herramienta como campo de entrada cuando estás en modo de edición -->
+      <ng-container *ngIf="editMode && framework.tipo === tipo">
+        <ion-label position="stacked">{{ tipo | titlecase }} Utilizado</ion-label>
+        <ion-input [(ngModel)]="framework.herramienta"></ion-input>
+      </ng-container>
+    </ion-item>
+  </ion-item-group>
+</ion-list>
+
 </ion-content>

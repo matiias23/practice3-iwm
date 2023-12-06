@@ -23,3 +23,5 @@ Route::resource('appointment', AppointmentController::class);
 Route::get('users', [UserController::class, 'index']);
 
 Route::get('profile', [ApiController::class, 'obtenerDatos']);
+
+Route::put('/editar-perfil/{rut}', [ApiController::class, 'editarPerfil']);
